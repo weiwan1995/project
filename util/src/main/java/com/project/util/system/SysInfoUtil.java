@@ -26,7 +26,7 @@ public class SysInfoUtil {
      */
     private static int gb = mb * 1024;
 
-    static void printSystemInfo() {
+    public static void printSystemInfo() {
         System.out.println("======================================");
         // 操作系统级内存情况查询
         OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
@@ -40,7 +40,7 @@ public class SysInfoUtil {
         System.out.println("操作系统总内存：" + physicalTotal + " MB");
     }
 
-    static void printThreadInfo() {
+    public static void printThreadInfo() {
         // 获得线程总数
         ThreadGroup parentThread;
         int totalThread = 0;
@@ -52,25 +52,25 @@ public class SysInfoUtil {
         System.out.println("获得线程总数:" + totalThread);
     }
 
-    static void printDiskInfo() {
+    public static void printDiskInfo() {
         //获取磁盘分区列表
         File[] roots = File.listRoots();
         int totalSpace = 0;
         int usableSpace = 0;
         double percent;
         for (File file : roots) {
-            System.out.println(file.getPath() + "已经使用 = " + file.getUsableSpace() / gb + "GB");
+            System.out.println(file.getPath() + "可用空间 = " + file.getUsableSpace() / gb + "GB");
             usableSpace += (file.getUsableSpace() / gb);
             //总空间
             System.out.println(file.getPath() + "总容量 = " + file.getTotalSpace() / gb + "GB");
             totalSpace += (file.getTotalSpace() / gb);
         }
-        System.out.println("系统已使用 = " + usableSpace + "GB");
+        System.out.println("系统可用空间 = " + usableSpace + "GB");
         System.out.println("系统磁盘总可用空间 = " + totalSpace + "GB");
         DecimalFormat format = new DecimalFormat("00");
         percent = usableSpace * 100.0 / totalSpace * 1.0;
         String percentStr = format.format(percent);
-        System.out.println("已用磁盘空间占比：" + percentStr + "%");
+        System.out.println("可用磁盘空间占比：" + percentStr + "%");
     }
 
 
